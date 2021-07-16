@@ -5,7 +5,7 @@ function getWeather(event){
     var inputEl=document.getElementById("cityInput");
     var cityName= inputEl.value;
     var apiLink = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${APIKey}`
-
+    console.log("hello");
 
     fetch(apiLink).then(function(res){
         return res.json();
