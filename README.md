@@ -16,9 +16,9 @@ This assignment utilized the API called OpenWeather in order to retrieve weather
 
 #### Link
 
-[Link to Deployed Website] (https://gisosa531.github.io/Coding-Quiz/)
+[Link to Deployed Website] (https://gisosa531.github.io/Weather-App/)
 
-[link to GitHub Repository] (https://github.com/gisosa531/Coding-Quiz)
+[link to GitHub Repository] (https://github.com/gisosa531/Weather-App)
 
 
 
