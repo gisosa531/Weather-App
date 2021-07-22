@@ -1,3 +1,4 @@
+//variabled
 var APIKey = "&appid=e6bc155639e8522b14cb4091f92c33e5";
 
 var searchInfo = document.querySelector("#cityInput");
@@ -10,35 +11,27 @@ var WeatherLink = `https://api.openweathermap.org/data/2.5/weather?q=` + cityNam
 
 var ForecastLink = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + '&units=imperial' + APIKey;
 
+// Info stored
 function setCityInfo() {
     localStorage.setItem('cityNameSave', searchInfo.value);
 }
 
-// var 
-// function getWeather(event){
-//     var apiLink = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${APIKey}`
-//     console.log("hello");
-
-//     fetch(apiLink).then(function(res){
-//         return res.json();
-//     }) .then(function(res){
-//         console.log(res);
-//     })
-// }
-
+//Time Displayed
 var currentTime = moment().format("dddd, MMMM Do");
+
 function showtTime() {
     $(".currentTime").text(currentTime);
 };
 showtTime();
 
+// Current Weather
 $.ajax ({
     url: WeatherLink,
     method: "GET"
 })
     .then(function(res) {
 
-        $('.place').html("<h2>" + res.name + "</h2>");
+        $('.place').html("<h3>" + res.name + "</h3>");
         $('.image').html("<img src='https://openweathermap.org/img/w/" + res.weather[0].icon + ".png' >");
         $('.humidity').text("Humidity: " + res.main.humidity + "%");
         $(".temperature").text("Temperature: " + res.main.temp + " F");
@@ -48,17 +41,59 @@ $.ajax ({
         var lon = res.coord.lon;
         var uvIndexLink = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + APIKey;
 
-        
+        //Uv index 
         $.ajax ({
             url: uvIndexLink,
             method: "GET"
-        })
-            .then(function(res) {
+        }) .then(function(res) {
                 var uvData = res.value
 
                 $('.uv').text("UV Index: " + res.value);
             });
 
     });
+
+    //Five day Forecast
+    $.ajax ({
+        url: ForecastLink,
+        method: "GET"
+    }) .then(function (res) {
+    
+            var firstDay = moment(res.list[0].dt_txt).format("dddd, MMM Do");
+    
+            $(".timeOne").html("<h5>" + firstDay + "</h5>");
+            $(".imageOne").html("<img src='https://openweathermap.org/img/w/" + res.list[0].weather[0].icon + ".png' alt='Weather Conditions Icon.'>");
+            $(".humidOne").text("Humidity: " + res.list[0].main.humidity + "%");
+            $(".tempOne").text("Temp: " + res.list[0].main.temp + " F");
+
+            var dayTwo = moment(res.list[8].dt_txt).format("dddd, MMM Do");
+
+            $(".timeTwo").html("<h5>" + dayTwo + "</h5>");
+            $(".imageTwo").html("<img src='https://openweathermap.org/img/w/" + res.list[8].weather[0].icon + ".png' alt='Weather Conditions Iconr.'>");
+            $(".tempTwo").text("Temp: " + res.list[8].main.temp + " F");
+            $(".humidTwo").text("Humidity: " + res.list[8].main.humidity + "%");
+
+            var dayThree = moment(res.list[16].dt_txt).format("dddd, MMM Do");
+
+            $(".timeThree").html("<h5>" + dayThree + "</h5>");
+            $(".imageThree").html("<img src='https://openweathermap.org/img/w/" + res.list[16].weather[0].icon + ".png' alt='Weather Conditions Icon.'>");
+            $(".tempThree").text("Temp: " + res.list[16].main.temp + " F");
+            $(".humidThree").text("Humidity: " + res.list[16].main.humidity + "%");
+
+            var dayFour = moment(res.list[24].dt_txt).format("dddd, MMM Do");
+    
+            $(".timeFour").html("<h5>" + dayFour + "</h5>");
+            $(".imageFour").html("<img src='https://openweathermap.org/img/w/" + res.list[24].weather[0].icon + ".png' alt='Weather Conditions Icon.'>");
+            $(".tempFour").text("Temp: " + res.list[24].main.temp + " F");
+            $(".humidFour").text("Humidity: " + res.list[24].main.humidity + "%");
+
+            var dayFive = moment(res.list[32].dt_txt).format("dddd, MMM Do");
+    
+            $(".timeFive").html("<h5>" + dayFive + "</h5>");
+            $(".imageFiven").html("<img src='https://openweathermap.org/img/w/" + res.list[32].weather[0].icon + ".png' alt='Weather Conditions Icon.'>");
+            $(".tempFive").text("Temp: " + res.list[32].main.temp + " F");
+            $(".humidFive").text("Humidity: " + res.list[32].main.humidity + "%");
+        });
+    
 
 submitEl.addEventListener("click", setCityInfo);
