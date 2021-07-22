@@ -14,6 +14,9 @@ var ForecastLink = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityN
 // Info stored
 function setCityInfo() {
     localStorage.setItem('cityNameSave', searchInfo.value);
+    for (var i = 0; i < localStorage.length; i++) {
+        $(".citiesInfo").append("<p>" + localStorage.getItem(localStorage.key(i)) + "</p>");
+    }
 }
 
 //Time Displayed
@@ -33,8 +36,8 @@ $.ajax ({
 
         $('.place').html("<h3>" + res.name + "</h3>");
         $('.image').html("<img src='https://openweathermap.org/img/w/" + res.weather[0].icon + ".png' >");
-        $('.humidity').text("Humidity: " + res.main.humidity + "%");
-        $(".temperature").text("Temperature: " + res.main.temp + " F");
+        $('.humid').text("Humidity: " + res.main.humidity + "%");
+        $(".temp").text("Temperature: " + res.main.temp + " F");
         $('.wind').text("Wind Speed: " + res.wind.speed + " MPH");
 
         var lat = res.coord.lat;
@@ -48,10 +51,26 @@ $.ajax ({
         }) .then(function(res) {
                 var uvData = res.value
 
+                $('.uv').css("background-color", uvDisplay(uvData));
                 $('.uv').text("UV Index: " + res.value);
             });
 
     });
+
+    function uvDisplay (uvData, uvColor) {
+        var uvColor = "";
+        if (uvData <= 2) {
+            uvColor = "#00b300";
+        }
+        else if (uvData <= 5 && uvData > 2) {
+            uvColor = "#ffac1c";
+        }
+        else if (uvData > 5) {
+            uvColor = "#ff2400";
+        }
+        return uvColor;
+    }
+    
 
     //Five day Forecast
     $.ajax ({
@@ -90,7 +109,7 @@ $.ajax ({
             var dayFive = moment(res.list[32].dt_txt).format("dddd, MMM Do");
     
             $(".timeFive").html("<h5>" + dayFive + "</h5>");
-            $(".imageFiven").html("<img src='https://openweathermap.org/img/w/" + res.list[32].weather[0].icon + ".png' alt='Weather Conditions Icon.'>");
+            $(".imageFive").html("<img src='https://openweathermap.org/img/w/" + res.list[32].weather[0].icon + ".png' alt='Weather Conditions Icon.'>");
             $(".tempFive").text("Temp: " + res.list[32].main.temp + " F");
             $(".humidFive").text("Humidity: " + res.list[32].main.humidity + "%");
         });

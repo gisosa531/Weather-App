@@ -1,0 +1,49 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Georgia', 'Times New Roman', Times, serif; 
+    font-size: large;
+}
+
+header {
+   color: whitesmoke;
+   font-family: "Trebuchet MS", sans-serif;
+   font-size: 5em;
+   letter-spacing: -2px;
+   border-bottom: 2px solid black;
+   text-transform: uppercase;
+}
+
+.container-fluid {
+    background-color: seashell;
+}
+
+
+.card {
+    border: ridge;
+}
+
+.row {
+    display: flex;
+}
+
+#forecast {
+    margin: 20px;
+    
+}
+
+#ForecastPosition {
+    display: flex;
+    text-align: flex-end;
+    padding: 5px;
+    
+}
+
+#currentDisplay {
+    position: relative;
+    width: 40%;
+   
+}
+
+.col {
+    padding: 5px;
+}
