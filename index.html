@@ -22,7 +22,8 @@
     </header>
 
 <div class= "container-fluid">
-    <aside class="card-body">
+    <div class="row">
+    <aside class="col-md-3 card-body">
         <h2 id="heading">
             Search for a city:
         </h2>
@@ -33,7 +34,7 @@
             placeholder="San Diego"
             />
             <button
-            type="submit"
+            type="button"
              id="submitBtn"
              class="btn-secondary">
              <i class="fa fa-globe"></i>      
@@ -43,7 +44,7 @@
         
         <div id="citiesInfo"></div>
     </aside>
-
+        <div class="col-md-9">
             <div id="currentDisplay" class="card">
                 <div  class="card-body">
                     <p class="currentTime"></p>
@@ -122,7 +123,8 @@
         </div>
     </div>
 </div>
-    
+</div>
+</div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
